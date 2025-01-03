@@ -80,7 +80,6 @@ The `config.json` file contains the following parameters:
 Example `.env` file to interact with the Fuji testnet and Arbitrum Sepolia testnet:
 
 ```bash
-PRIVATE_KEY=<your_private_key>
 RPC_URL_FUJI=<your_rpc_url_fuji>
 RPC_URL_ARBITRUM_SEPOLIA=<your_rpc_url_arbitrum_sepolia>
 ETHERSCAN_API_KEY=<your_etherscan_api_key>
@@ -89,7 +88,6 @@ ARBISCAN_API_KEY=<your_arbiscan_api_key>
 
 Variables to configure:
 
-- `PRIVATE_KEY`: The private key for your testnet wallet. If you use MetaMask, you can follow this [guide](https://support.metamask.io/managing-my-wallet/secret-recovery-phrase-and-private-keys/how-to-export-an-accounts-private-key/) to export your private key. **Note**: This key is required for signing transactions like token transfers.
 - `RPC_URL_FUJI`: The RPC URL for the Fuji testnet. You can get this from the [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/) website.
 - `RPC_URL_ARBITRUM_SEPOLIA`: The RPC URL for the Arbitrum Sepolia testnet. You can get this from the [Alchemy](https://www.alchemy.com/) or [Infura](https://infura.io/) website.
 - `ETHERSCAN_API_KEY`: An API key from Etherscan to verify your contracts. You can obtain one from [Etherscan](https://docs.etherscan.io/getting-started/viewing-api-usage-statistics).
@@ -110,7 +108,7 @@ Accepts the admin role for a deployed token via the `TokenAdminRegistry` contrac
 ### Usage
 
 ```bash
-forge script script/AcceptAdminRole.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/AcceptAdminRole.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast
 ```
 
 ### Config Parameters
@@ -125,7 +123,7 @@ The script pulls the token address from a previously deployed token in a JSON fi
 - Accept the admin role for a token:
 
   ```bash
-  forge script script/AcceptAdminRole.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast
+  forge script script/AcceptAdminRole.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast
   ```
 
   This will:
@@ -149,7 +147,7 @@ Accepts the admin role for a specified token via the `TokenAdminRegistry` contra
 ### Usage
 
 ```bash
-forge script script/AcceptTokenAdminRole.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --sig "run(address)" -- <TOKEN_ADDRESS>
+forge script script/AcceptTokenAdminRole.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --sig "run(address)" -- <TOKEN_ADDRESS>
 ```
 
 ### Config Parameters
@@ -162,7 +160,7 @@ forge script script/AcceptTokenAdminRole.s.sol --rpc-url $RPC_URL --private-key 
 - Accept the admin role for a token on Avalanche Fuji:
 
   ```bash
-  forge script script/AcceptTokenAdminRole.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --sig "run(address)" -- 0xYourTokenAddress
+  forge script script/AcceptTokenAdminRole.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --sig "run(address)" -- 0xYourTokenAddress
   ```
 
   This will:
@@ -187,7 +185,7 @@ Adds a remote pool to a local token pool's configuration, enabling cross-chain i
 ### Usage
 
 ```bash
-forge script script/AddRemotePool.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+forge script script/AddRemotePool.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
   --sig "run(address,uint256,address)" -- <POOL_ADDRESS> <REMOTE_CHAIN_ID> <REMOTE_POOL_ADDRESS>
 ```
 
@@ -202,7 +200,7 @@ forge script script/AddRemotePool.s.sol --rpc-url $RPC_URL --private-key $PRIVAT
 - Add a remote pool to a local pool on Avalanche Fuji, specifying a remote pool on Arbitrum Sepolia:
 
   ```bash
-  forge script script/AddRemotePool.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/AddRemotePool.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,uint256,address)" -- \
     0xYourLocalPoolAddress \
     421613 \
@@ -229,7 +227,7 @@ Configures cross-chain parameters for a token pool, including remote pool addres
 ### Usage
 
 ```bash
-forge script script/ApplyChainUpdates.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/ApplyChainUpdates.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -247,7 +245,7 @@ The script pulls the pool and token addresses from previously deployed pool and 
 - Apply chain updates for cross-chain token transfers:
 
   ```bash
-  forge script script/ApplyChainUpdates.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/ApplyChainUpdates.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -271,7 +269,7 @@ Claims the admin role for a deployed token contract using either the `CCIP admin
 ### Usage
 
 ```bash
-forge script script/ClaimAdmin.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/ClaimAdmin.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -287,7 +285,7 @@ The script pulls the token and admin details from the `config.json` file and the
 - Claim admin role using the `owner()` function:
 
   ```bash
-  forge script script/ClaimAdmin.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/ClaimAdmin.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -300,7 +298,7 @@ The script pulls the token and admin details from the `config.json` file and the
   Ensure that the `withGetCCIPAdmin` and `ccipAdminAddress` fields are properly set in the `config.json` file.
 
   ```bash
-  forge script script/ClaimAdmin.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/ClaimAdmin.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -323,7 +321,7 @@ Deploys a new `BurnMintTokenPool` contract and associates it with an already dep
 ### Usage
 
 ```bash
-forge script script/DeployBurnMintTokenPool.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/DeployBurnMintTokenPool.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -338,7 +336,7 @@ The script pulls the token address from a previously deployed token in a JSON fi
 - Deploy a token pool:
 
   ```bash
-  forge script script/DeployBurnMintTokenPool.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/DeployBurnMintTokenPool.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -362,7 +360,7 @@ Deploys a new `LockReleaseTokenPool` contract and associates it with an already 
 ### Usage
 
 ```bash
-forge script script/DeployLockReleaseTokenPool.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/DeployLockReleaseTokenPool.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -377,7 +375,7 @@ The script pulls the token address from a previously deployed token in a JSON fi
 - Deploy a `LockReleaseTokenPool`:
 
   ```bash
-  forge script script/DeployLockReleaseTokenPool.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/DeployLockReleaseTokenPool.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -401,7 +399,7 @@ Deploys a new ERC-677 token contract with optional CCIP admin functionality. Thi
 ### Usage
 
 ```bash
-forge script script/DeployToken.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/DeployToken.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -420,7 +418,7 @@ The script pulls its configuration from the `config.json` file located in the `s
 - Deploy a token without CCIP admin functionality:
 
   ```bash
-  forge script script/DeployToken.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/DeployToken.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
 - Deploy a token with CCIP admin functionality:
@@ -428,7 +426,7 @@ The script pulls its configuration from the `config.json` file located in the `s
   Ensure that the `withGetCCIPAdmin` and `ccipAdminAddress` fields are properly set in the `config.json` file.
 
   ```bash
-  forge script script/DeployToken.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/DeployToken.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
 - Deploy a token with a maximum supply:
@@ -449,7 +447,7 @@ The script pulls its configuration from the `config.json` file located in the `s
   Then run the script:
 
   ```bash
-  forge script script/DeployToken.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/DeployToken.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
 ### Notes
@@ -569,7 +567,7 @@ The `MintTokens` script mints a specified amount of tokens to the sender's addre
 ### Usage
 
 ```bash
-forge script script/MintTokens.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+forge script script/MintTokens.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast
 ```
 
 ### Config Parameters
@@ -584,7 +582,7 @@ The script pulls the token address from a previously deployed token in a JSON fi
 - Mint tokens:
 
   ```bash
-  forge script script/MintTokens.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast
+  forge script script/MintTokens.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast
   ```
 
   This will:
@@ -609,7 +607,7 @@ Removes a remote pool from a local `TokenPool` contract's configuration, effecti
 ### Usage
 
 ```bash
-forge script script/RemoveRemotePool.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+forge script script/RemoveRemotePool.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
   --sig "run(address,uint256,address)" -- <POOL_ADDRESS> <REMOTE_CHAIN_ID> <REMOTE_POOL_ADDRESS>
 ```
 
@@ -624,7 +622,7 @@ forge script script/RemoveRemotePool.s.sol --rpc-url $RPC_URL --private-key $PRI
 - Remove a remote pool from a local pool on Avalanche Fuji, specifying a remote pool on Arbitrum Sepolia:
 
   ```bash
-  forge script script/RemoveRemotePool.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/RemoveRemotePool.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,uint256,address)" -- \
     0xYourLocalPoolAddress \
     421613 \
@@ -653,7 +651,7 @@ Sets the pool for a deployed token in the `TokenAdminRegistry` contract. The scr
 ### Usage
 
 ```bash
-forge script script/SetPool.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/SetPool.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -669,7 +667,7 @@ The script pulls the token and pool addresses from previously deployed token and
 - Set the pool for a token:
 
   ```bash
-  forge script script/SetPool.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/SetPool.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -692,7 +690,7 @@ Sets the rate limit administrator for a specified `TokenPool` contract. This scr
 ### Usage
 
 ```bash
-forge script script/SetRateLimitAdmin.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+forge script script/SetRateLimitAdmin.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
   --sig "run(address,address)" -- <POOL_ADDRESS> <ADMIN_ADDRESS>
 ```
 
@@ -706,7 +704,7 @@ forge script script/SetRateLimitAdmin.s.sol --rpc-url $RPC_URL --private-key $PR
 - Set the rate limit admin for a pool on Avalanche Fuji:
 
   ```bash
-  forge script script/SetRateLimitAdmin.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/SetRateLimitAdmin.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,address)" -- \
     0xYourPoolAddress \
     0xNewAdminAddress
@@ -733,7 +731,7 @@ Initiates the transfer of the admin role for a specified token to a new administ
 ### Usage
 
 ```bash
-forge script script/TransferTokenAdminRole.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+forge script script/TransferTokenAdminRole.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
   --sig "run(address,address)" -- <TOKEN_ADDRESS> <NEW_ADMIN_ADDRESS>
 ```
 
@@ -747,7 +745,7 @@ forge script script/TransferTokenAdminRole.s.sol --rpc-url $RPC_URL --private-ke
 - Transfer the admin role of a token on Avalanche Fuji to a new admin:
 
   ```bash
-  forge script script/TransferTokenAdminRole.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/TransferTokenAdminRole.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,address)" -- \
     0xYourTokenAddress \
     0xNewAdminAddress
@@ -778,7 +776,7 @@ The `TransferTokens` script facilitates cross-chain token transfers using Chainl
 ### Usage
 
 ```bash
-forge script script/TransferTokens.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+forge script script/TransferTokens.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast --verify
 ```
 
 ### Config Parameters
@@ -795,7 +793,7 @@ The script pulls the token address, transfer amount, and fee type from the `conf
 - Transfer tokens across chains:
 
   ```bash
-  forge script script/TransferTokens.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast --verify
+  forge script script/TransferTokens.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast --verify
   ```
 
   This will:
@@ -820,7 +818,7 @@ Updates the allow list for a specified `TokenPool` contract by adding and/or rem
 ### Usage
 
 ```bash
-forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
   --sig "run(address,address[],address[])" -- <POOL_ADDRESS> [<ADDRESSES_TO_ADD>] [<ADDRESSES_TO_REMOVE>]
 ```
 
@@ -835,7 +833,7 @@ forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --private-key $PRIV
 - Update the allow list for a pool on Avalanche Fuji, adding two addresses and removing one:
 
   ```bash
-  forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,address[],address[])" -- \
     0xYourPoolAddress \
     '[0xAddressToAdd1,0xAddressToAdd2]' \
@@ -864,7 +862,7 @@ forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --private-key $PRIV
 - **Example with No Addresses to Remove**: If you only want to add addresses and not remove any, you can pass an empty array for `addressesToRemove`:
 
   ```bash
-  forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+  forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
     --sig "run(address,address[],address[])" -- \
     0xYourPoolAddress \
     "[0x45C90FBb5acC1a5c156a401B56Fea55e69E7669d,0x2C961E991aeCbF15224f20b175bdB340c42806D4]" \
@@ -874,7 +872,7 @@ forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --private-key $PRIV
 - **Example with No Addresses to Add**: If you only want to remove addresses and not add any, you can pass an empty array for `addressesToAdd`:
 
   ```bash
-  forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+  forge script script/UpdateAllowList.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
     --sig "run(address,address[],address[])" -- \
     0xYourPoolAddress \
     '[]' \
@@ -890,7 +888,7 @@ The `UpdateRateLimiters` script allows you to modify the rate limiter settings f
 ### Usage
 
 ```bash
-forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast \
+forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL --account <your-keystore-name> --broadcast \
   --sig "run(address,uint256,uint8,bool,uint128,uint128,bool,uint128,uint128)" -- \
   <POOL_ADDRESS> \
   <REMOTE_CHAIN_ID> \
@@ -923,7 +921,7 @@ forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL --private-key $P
 - Update both inbound and outbound rate limiters for a pool on Avalanche Fuji:
 
   ```bash
-  forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,uint256,uint8,bool,uint128,uint128,bool,uint128,uint128)" -- \
     <POOL_ADDRESS> \
     43113 \
@@ -945,7 +943,7 @@ forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL --private-key $P
 - Update only the outbound rate limiter:
 
   ```bash
-  forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL_FUJI --private-key $PRIVATE_KEY --broadcast \
+  forge script script/UpdateRateLimiters.s.sol --rpc-url $RPC_URL_FUJI --account <your-keystore-name> --broadcast \
     --sig "run(address,uint256,uint8,bool,uint128,uint128,bool,uint128,uint128)" -- \
     <POOL_ADDRESS> \
     43113 \
