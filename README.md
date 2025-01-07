@@ -26,10 +26,10 @@ Example `config.json` file:
   },
   "tokenAmountToMint": 1000000000000000000000,
   "tokenAmountToTransfer": 10000,
-  "feeType": "native",
+  "feeType": "link",
   "remoteChains": {
-    "43113": 421614,
-    "421614": 43113
+    "11155111": 421614,
+    "421614": 11155111
   }
 }
 ```
@@ -77,7 +77,7 @@ Variables to configure:
 source .env
 ```
 
-### 1. Deploy the tokens
+### 1. Deploy the token contracts
 
 On Sepolia:
 
@@ -147,7 +147,7 @@ On Arbitrum Spolia:
 forge script script/SetPool.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC_URL --account <your-keystore-name> --broadcast --sender <your-address>
 ```
 
-### Add the remote chain to the token pool
+### 6. Add the remote chain to the token pool
 
 On Sepolia:
 
@@ -161,13 +161,13 @@ On Aribtrum Sepolia:
 forge script script/ApplyChainUpdates.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC_URL --account <your-keystore-name> --broadcast --sender <your-address>
 ```
 
-- Mint tokens
+### 7. Mint tokens
 
 ```bash
-forge script script/MintTokens.s.sol --rpc-url $SEPOLA_RPC_URL --account <your-keystore-name> --broadcast --sender <your-address>
+forge script script/MintTokens.s.sol --rpc-url $SEPOLIA_RPC_URL --account <your-keystore-name> --broadcast --sender <your-address>
 ```
 
-- Transfer tokens cross-chain from Sepolia to Arbitrum Sepolia
+### 8. Transfer tokens cross-chain from Sepolia to Arbitrum Sepolia
 
 ```bash
 forge script script/TransferTokens.s.sol --rpc-url $SEPOLIA_RPC_URL --account <your-keystore-name> --broadcast <your-address>
