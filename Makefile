@@ -96,3 +96,4 @@ deploy-mint-token-arbitrium-sepolia:
 # Sending the token to avala
 deploy-send-cross-chain-avalanche-fuji:
 	@forge script script/TransferTokens.s.sol --rpc-url $(AVLANCHE_FUJI_RPC_URL) --private-key $(PRIVATE_KEY) --broadcast
+

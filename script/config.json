@@ -8,7 +8,7 @@
     "ccipAdminAddress": "0x0000000000000000000000000000000000000000"
   },
   "tokenAmountToMint": 1000000000000000000000,
-  "tokenAmountToTransfer": 10000,
+  "tokenAmountToTransfer": 1000,
   "feeType": "link",
   "remoteChains": {
     "43113":421614,   // Avalanche Source => Arbitrium Destination
