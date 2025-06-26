@@ -1,7 +1,7 @@
 {
   "BnMToken": {
-    "name": "BnM KH",
-    "symbol": "BnMkh",
+    "name": "HISHO",
+    "symbol": "HISHO",
     "decimals": 18,
     "maxSupply": 0,
     "withGetCCIPAdmin": false,
@@ -11,7 +11,7 @@
   "tokenAmountToTransfer": 10000,
   "feeType": "link",
   "remoteChains": {
-    "11155111": 421614,
-    "421614": 11155111
+    "43113":421614,   // Avalanche Source => Arbitrium Destination
+    "421614": 43113   // Arbitrium Source => Avalanche Destination
   }
 }
